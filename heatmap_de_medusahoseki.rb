@@ -220,6 +220,35 @@ def dynamic_mode_switcher
   end
 end
 
+def proximity_de_medusahoseki(a, b)
+  maximum_distance     = b
+  distance_probability = a
+  
+  calculation = maximum_distance - ( maximum_distance * distance_probability )
+  calculation = calculation.round
+  
+  "Distance from Medusahoseki: #{calculation}"
+end
+
+def proximity_de_nemedusahoseki(a, b)
+  maximum_distance     = b
+  distance_probability = 1 - a
+  
+  calculation = maximum_distance - ( maximum_distance * distance_probability )
+  calculation = calculation.round
+  
+  "Distance from Nemedusahoseki ( Salamander Riding Goat ): #{calculation}"
+end
+
+def proximity_de_memorie(a)
+  year_period = 12
+  
+  calculation = 12 - ( 12 * a )
+  calculation = calculation.round
+  
+  "This memory was from a prior #{calculation} year period"
+end
+
 ## That time
 def self.sore_float(condition)
   if condition
@@ -300,22 +329,19 @@ print "The present cold status: "
 active_state = sore_float($current_probability > ideal_cold) do
   puts "#{$current_definition}"
   
-  #require "NeoPathfinding"
-  #thresholding(ideal_cold, 12, 12)
+  puts proximity_de_medusahoseki(150, $current_probability)
 end
 
 active_state = shikashi_float(active_state, $current_probability < ideal_cold) do
   puts "#{$current_definition}"
 
-  #require "NeoPathfinding"
-  #thresholding(ideal_cold, 12, 12)
+  puts proximity_de_medusahoseki(150, $current_probability)
 end
 
 active_state = matawa_float(active_state) do
   puts "#{$current_definition}."
 
-  #require "NeoPathfinding"
-  #thresholding(ideal_cold, 12, 12)
+  puts proximity_de_medusahoseki(150, $current_probability)
 end
 
 2.times do
@@ -334,20 +360,17 @@ print "The present heat status: "
 active_state = sore_float($current_probability > ideal_heat) do
   puts "#{$current_definition}"
 
-  #require "NeoPathfinding"
-  #thresholding(ideal_heat, 12, 12)
+  puts proximity_de_nemedusahoseki(150, $current_probability)
 end
 
 active_state = shikashi_float(active_state, $current_probability < ideal_heat) do
   puts "#{$current_definition}"
 
-  #require "NeoPathfinding"
-  #thresholding(ideal_heat, 12, 12)
+  puts proximity_de_nemedusahoseki(150, $current_probability)
 end
 
 active_state = matawa_float(active_state) do
   puts "#{$current_definition}."
 
-  #require "NeoPathfinding"
-  #thresholding(ideal_heat, 12, 12)
+  puts proximity_de_nemedusahoseki(150, $current_probability)
 end
